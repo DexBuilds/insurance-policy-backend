@@ -21,6 +21,9 @@ export class PolicyRequestsController {
     return this.policyRequestsService.create(createPolicyRequestDto);
   }
 
+  @ApiOperation({ summary: 'Obtener todas las solicitudes (Cacheado por 30s)' })
+  @UseInterceptors(CacheInterceptor)
+  @CacheTTL(30000)
   @Get()
   findAll(
     @Query('status') status?: PolicyStatus,
