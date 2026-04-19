@@ -1,0 +1,183 @@
+{
+  "info": {
+    "_postman_id": "4fc3caa1-4f5c-428a-83b6-31176c8f44ab",
+    "name": "insurance-policy-backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51876070",
+    "_collection_link": "https://go.postman.co/collection/51876070-4fc3caa1-4f5c-428a-83b6-31176c8f44ab?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (Admin Role)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"admin@insurance.com\",\r\n    \"password\": \"admin123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login (User Role)",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"user@insurance.com\",\r\n    \"password\": \"user123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Policy Requests",
+      "item": [
+        {
+          "name": "Create Policy Request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGluc3VyYW5jZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzY1NzY2MzEsImV4cCI6MTc3NjU4MDIzMX0.-mNM_s5ZiXRGmGvfp1qLu3VUMTWDmntPQRP7FClUcb0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"folio\": \"POL-2003-022\",\r\n  \"customerName\": \"Derek Cabrera Costa\",\r\n  \"customerEmail\": \"derekcabreracos@gmail.com\",\r\n  \"product\": \"Seguro de NESTJS Médicos Mayores\",\r\n  \"insuredAmount\": 333\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/policy-requests",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "policy-requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List Policy Requests (Filtered & Paginated)",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Get Policy Request by ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAaW5zdXJhbmNlLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzc2NTc0MDQ2LCJleHAiOjE3NzY1Nzc2NDZ9.h5mejE_3mTtcfFnSMXr9oAIBRhe4anyTE75cdhlBnmY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/policy-requests/D203433E-F36B-1410-8F2D-00DC05127E89",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "policy-requests",
+                "D203433E-F36B-1410-8F2D-00DC05127E89"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Policy Request Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGluc3VyYW5jZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NzY1NzY2MzEsImV4cCI6MTc3NjU4MDIzMX0.-mNM_s5ZiXRGmGvfp1qLu3VUMTWDmntPQRP7FClUcb0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"ISSUED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/policy-requests/D603433E-F36B-1410-8F2D-00DC05127E89/status",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "policy-requests",
+                "D603433E-F36B-1410-8F2D-00DC05127E89",
+                "status"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

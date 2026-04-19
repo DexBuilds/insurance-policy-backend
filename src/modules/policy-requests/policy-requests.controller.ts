@@ -6,7 +6,7 @@ import { PolicyStatus } from './entities/policy-request.entity';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
-import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery} from '@nestjs/swagger';
 import { CacheInterceptor, CacheTTL } from '@nestjs/cache-manager';
 
 @ApiTags('Policy Requests')
@@ -22,6 +22,11 @@ export class PolicyRequestsController {
   }
 
   @ApiOperation({ summary: 'Obtener todas las solicitudes (Cacheado por 30s)' })
+  @ApiQuery({ name: 'status', enum: PolicyStatus, required: false, description: 'Filtrar por estatus' })
+  @ApiQuery({ name: 'customerName', required: false, example: 'Derek Cabrera', description: 'Buscar por nombre del cliente' })
+  @ApiQuery({ name: 'folio', required: false, example: 'POL-2026-001', description: 'Buscar por folio exacto' })
+  @ApiQuery({ name: 'limit', required: false, example: 10, type: Number, description: 'Cantidad de resultados por página' })
+  @ApiQuery({ name: 'page', required: false, example: 1, type: Number, description: 'Página actual' })
   @UseInterceptors(CacheInterceptor)
   @CacheTTL(30000)
   @Get()

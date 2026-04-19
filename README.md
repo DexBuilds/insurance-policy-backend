@@ -21,18 +21,14 @@ Para asegurar la correcta ejecución del sistema, se requiere contar con los sig
 
 1. **Clonación del Repositorio**
     
-    Bash
-    
-    ```
+    ```Bash
     git clone https://github.com/DexBuilds/insurance-policy-backend.git
     cd insurance-policy-backend
     ```
     
 2. **Instalación de Dependencias**
     
-    Bash
-    
-    ```
+    ```Bash
     npm install
     ```
     
@@ -40,7 +36,7 @@ Para asegurar la correcta ejecución del sistema, se requiere contar con los sig
     
     Fragmento de código
     
-    ```
+    ```Bash
     DB_PORT=1433
     DB_USERNAME=sa
     DB_PASSWORD=Contraseña123@
@@ -84,13 +80,13 @@ Se han implementado pruebas automatizadas para asegurar la integridad de las reg
 
 - **Pruebas Unitarias:** Validan la lógica de servicios y transiciones de estado. Se implementaron **mocks de repositorios (TypeORM)** para garantizar que la capa de negocio se evalúe de forma completamente independiente a la base de datos.
 
- ```bash
+ ```Bash
  npm run test
  ```
 
 - **Pruebas de Integración (E2E):** Simulan flujos completos de peticiones HTTP, validación de DTOs y control de acceso. Se configuró un entorno de pruebas aislado haciendo **mock del sistema de caché (Redis), la capa de persistencia y los Guards de autenticación (JWT)**. Esto permite una ejecución determinista y de latencia ultrabaja (milisegundos) sin depender de la infraestructura externa de contenedores.
 
-``` Bash
+```Bash
 npm run test:e2e
 ```
 
