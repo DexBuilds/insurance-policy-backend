@@ -12,6 +12,12 @@ services:
       - MSSQL_PID=Developer
     volumes:
       - sql_data:/var/opt/mssql
+  redis:
+    image: redis:alpine
+    container_name: insurance_redis
+    ports:
+      - "6379:6379"
+    restart: always
 
 volumes:
   sql_data:
