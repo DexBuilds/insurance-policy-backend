@@ -10,22 +10,22 @@ export enum PolicyStatus {
 @Entity('policy_requests')
 export class PolicyRequest {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id!: string;
 
     @Column({ unique: true })
-    folio: string;
+    folio!: string;
 
     @Column()
-    customerName: string;
+    customerName!: string;
 
     @Column()
-    customerEmail: string;
+    customerEmail!: string;
 
     @Column()
-    product: string;
+    product!: string;
 
     @Column('decimal', { precision: 12, scale: 2 })
-    insuredAmount: number;
+    insuredAmount!: number;
 
     @Column({
         type: 'varchar',
@@ -33,11 +33,11 @@ export class PolicyRequest {
         default: PolicyStatus.PENDING,
     })
 
-    status: PolicyStatus;
+    status!: PolicyStatus;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt!: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    updatedAt!: Date;
 }
