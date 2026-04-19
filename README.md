@@ -59,9 +59,7 @@ El despliegue de la infraestructura se gestiona mediante contenedores para garan
 
 1. **Levantamiento de Infraestructura**
     
-    Bash
-    
-    ```
+    ```Bash
     docker-compose up -d
     ```
     
@@ -69,9 +67,7 @@ El despliegue de la infraestructura se gestiona mediante contenedores para garan
     
 2. **Inicio de la Aplicación**
     
-    Bash
-    
-    ```
+    ```Bash
     npm run start:dev
     ```
     
@@ -87,11 +83,13 @@ La definición completa de los contratos de la API, esquemas de datos y códigos
 Se han implementado pruebas automatizadas para asegurar la integridad de las reglas de negocio y la estabilidad de los endpoints, aislando el código mediante técnicas avanzadas de simulación.
 
 - **Pruebas Unitarias:** Validan la lógica de servicios y transiciones de estado. Se implementaron **mocks de repositorios (TypeORM)** para garantizar que la capa de negocio se evalúe de forma completamente independiente a la base de datos.
+
  ```bash
  npm run test
  ```
 
 - **Pruebas de Integración (E2E):** Simulan flujos completos de peticiones HTTP, validación de DTOs y control de acceso. Se configuró un entorno de pruebas aislado haciendo **mock del sistema de caché (Redis), la capa de persistencia y los Guards de autenticación (JWT)**. Esto permite una ejecución determinista y de latencia ultrabaja (milisegundos) sin depender de la infraestructura externa de contenedores.
+
 ``` Bash
 npm run test:e2e
 ```
@@ -106,12 +104,12 @@ npm run test:e2e
     
 - **Seguridad y Control de Acceso:** Se implementó una arquitectura de seguridad basada en Claims dentro de los tokens JWT. El acceso a la actualización de estados críticos está restringido mediante un `RolesGuard`, permitiendo únicamente la ejecución a usuarios con roles de administrador o supervisor.
 	
-- - **Estandarización de Respuestas:** A través de un `TransformInterceptor`, todas las respuestas exitosas de la API son envueltas en un formato unificado (`success`, `data`, `timestamp`), manteniendo total coherencia con el manejo global de excepciones.
+- **Estandarización de Respuestas:** A través de un `TransformInterceptor`, todas las respuestas exitosas de la API son envueltas en un formato unificado (`success`, `data`, `timestamp`), manteniendo total coherencia con el manejo global de excepciones.
 	
 - **Trazabilidad y Monitoreo (Logs):** Se integró un `LoggerMiddleware` global que registra las peticiones HTTP entrantes (método, ruta, status code, IP), facilitando la auditoría y el debugging en entornos de desarrollo y producción.
 
 
-### Diagrama de Arquitectura de Alto Nivel
+### Diagrama de Arquitectura
 
 El siguiente diagrama ilustra el flujo de las peticiones a través de las distintas capas de la aplicación:
 
