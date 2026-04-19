@@ -1,10 +1,13 @@
 import { IsString, IsEmail, IsNumber, Min, IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreatePolicyRequestDto {
+    @ApiProperty({ example: 'POL-2026-001' })
     @IsString()
-    @IsNotEmpty()
+     @IsNotEmpty()
     folio!: string;
 
+    @ApiProperty({ example: 'Derek Cabrera' })
     @IsString()
     @IsNotEmpty()
     customerName!: string;

@@ -6,7 +6,10 @@ import { PolicyStatus } from './entities/policy-request.entity';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
+import { ApiTags, ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 
+@ApiTags('Policy Requests')
+@ApiBearerAuth()
 @Controller('policy-requests')
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class PolicyRequestsController {
