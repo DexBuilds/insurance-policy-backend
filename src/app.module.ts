@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PolicyRequestsModule } from './modules/policy-requests/policy-requests.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -19,19 +20,16 @@ import { PolicyRequestsModule } from './modules/policy-requests/policy-requests.
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        
         autoLoadEntities: true, 
-        
         synchronize: true, 
-        
         options: {
           encrypt: false,
           trustServerCertificate: true,
         },
       }),
     }),
-
     PolicyRequestsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
