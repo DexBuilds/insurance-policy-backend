@@ -17,6 +17,6 @@ export class CreatePolicyRequestDto {
     product!: string;
 
     @IsNumber()
-    @Min(0.01, { message: 'El insuredAmount debe ser mayor a 0' }) // Regla de negocio del PDF
+    @Min(0.01, { message: 'El insuredAmount debe ser mayor a 0' })
     insuredAmount!: number;
 }

@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Query } from '@nestjs/common';
 import { PolicyRequestsService } from './policy-requests.service';
 import { CreatePolicyRequestDto } from './dto/create-policy-request.dto';
-import { UpdatePolicyRequestDto } from './dto/update-policy-request.dto';
+import { UpdatePolicyStatusDto } from './dto/update-policy-status.dto';
+import { PolicyStatus } from './entities/policy-request.entity';
 
 @Controller('policy-requests')
 export class PolicyRequestsController {
@@ -13,22 +14,29 @@ export class PolicyRequestsController {
   }
 
   @Get()
-  findAll() {
-    return this.policyRequestsService.findAll();
+  findAll(
+    @Query('status') status?: PolicyStatus,
+    @Query('customerName') customerName?: string,
+    @Query('folio') folio?: string,
+    @Query('limit') limit?: number,
+    @Query('page') page?: number,
+  ) {
+
+    const limitParsed = limit ? +limit : 10;
+    const pageParsed = page ? +page : 1;
+    return this.policyRequestsService.findAll(status, customerName, folio, limitParsed, pageParsed);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.policyRequestsService.findOne(+id);
+    return this.policyRequestsService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePolicyRequestDto: UpdatePolicyRequestDto) {
-    return this.policyRequestsService.update(+id, updatePolicyRequestDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.policyRequestsService.remove(+id);
+  @Patch(':id/status')
+  updateStatus(
+    @Param('id') id: string, 
+    @Body() updatePolicyStatusDto: UpdatePolicyStatusDto
+  ) {
+    return this.policyRequestsService.updateStatus(id, updatePolicyStatusDto.status);
   }
 }
